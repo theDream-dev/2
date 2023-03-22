@@ -6,10 +6,10 @@ from aiogram.utils import executor
 from aiogram.types import ParseMode, ChatActions, Message
 
 # Set up OpenAI API key
-openai.api_key = "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"
+openai.api_key = "хуй там"
 
 # Set up Telegram bot
-bot = Bot(token="6076443590:AAFYS6bHQWC8Te61QXoUUxc4XVRtuaZ4ZGI")
+bot = Bot(token="хуй там")
 dp = Dispatcher(bot)
 
 print('mvd')
