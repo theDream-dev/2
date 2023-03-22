@@ -6,7 +6,7 @@ from aiogram.utils import executor
 from aiogram.types import ParseMode, ChatActions, Message
 
 # Set up OpenAI API key
-openai.api_key = "хуй там"
+openai.api_key = "хуй там апи не будет"
 
 # Set up Telegram bot
 bot = Bot(token="хуй там")
