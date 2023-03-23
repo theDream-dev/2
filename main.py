@@ -10,7 +10,7 @@ from aiogram.types import ParseMode, ChatActions, Message
 openai.api_key = cfg.AI_TOKEN
 
 # Set up Telegram bot
-bot = Bot(token=cfg.TG_TOKEN)
+bot = Bot(cfg.TG_TOKEN)
 dp = Dispatcher(bot)
 
 print('mvd')
@@ -25,10 +25,11 @@ def update(messages, role, content):
     messages_arr.append({"role": role, "content": content})
     return messages_arr
 
+
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.answer("Привет! Я молодой чат бот основанный на нейросети GPT от компании OpenAI.")
-    await message.answer("Как я могу вам помочь?")
+    await bot.send_message(message.chat.id,"Привет! Я молодой чат бот основанный на нейросети GPT от компании OpenAI.",  parse_mode="MarkdownV2")
+    await bot.send_message(message.chat.id,"Как я могу вам помочь?",  parse_mode="MarkdownV2")
 
 @dp.message_handler()
 async def respond_to_question(message: types.Message):
