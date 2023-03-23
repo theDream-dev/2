@@ -1,15 +1,16 @@
 import openai
 import aiogram
+import config as cfg
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from aiogram.types import ParseMode, ChatActions, Message
 
 # Set up OpenAI API key
-openai.api_key = "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"
+openai.api_key = cfg.AI_TOKEN
 
 # Set up Telegram bot
-bot = Bot(token="6076443590:AAGyIFCG9lEfq20K6ECsyRxQzQe1flriOnQ")
+bot = Bot(token=cfg.TG_TOKEN)
 dp = Dispatcher(bot)
 
 print('mvd')
