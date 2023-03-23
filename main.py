@@ -6,10 +6,10 @@ from aiogram.utils import executor
 from aiogram.types import ParseMode, ChatActions, Message
 
 # Set up OpenAI API key
-openai.api_key = "хуй там апи не будет"
+openai.api_key = "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"
 
 # Set up Telegram bot
-bot = Bot(token="хуй там")
+bot = Bot(token="6076443590:AAGyIFCG9lEfq20K6ECsyRxQzQe1flriOnQ")
 dp = Dispatcher(bot)
 
 print('mvd')
@@ -34,7 +34,7 @@ async def respond_to_question(message: types.Message):
 
     update(messages_arr, "user", message.text)
 
-    await bot.send_chat_action(message.chat.id, action=types.ChatActions.TYPING, duration=15)
+    await bot.send_chat_action(message.chat.id, ChatActions.TYPING)
 
     # Get the question from the user
     question = message.text
@@ -55,8 +55,6 @@ async def respond_to_question(message: types.Message):
 
     else:
         await bot.send_message(message.chat.id, text = answer)
-
-    await bot.send_chat_action(message.chat.id, action=types.ChatActions.CANCEL)    
 
     await bot.send_message(message.chat.id, len(messages_arr))
 
