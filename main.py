@@ -28,8 +28,8 @@ def update(messages, role, content):
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await bot.send_message(message.chat.id,"Привет! Я молодой чат бот основанный на нейросети GPT от компании OpenAI.",  parse_mode="MarkdownV2")
-    await bot.send_message(message.chat.id,"Как я могу вам помочь?",  parse_mode="MarkdownV2")
+    await bot.send_message(message.chat.id,"Привет\! Я молодой чат бот основанный на нейросети GPT от компании OpenAI\.",  parse_mode="MarkdownV2")
+    await bot.send_message(message.chat.id,"Как я могу вам помочь\?",  parse_mode="MarkdownV2")
 
 @dp.message_handler()
 async def respond_to_question(message: types.Message):
@@ -65,8 +65,8 @@ async def respond_to_question(message: types.Message):
 
     # проверка длины контекста и орезка 
 
-if len(messages_arr) >=16:
-    messages_arr = messages_arr[:3]    
+    if len(messages_arr) >=16:
+        messages_arr = messages_arr[:3]    
 
 
 
