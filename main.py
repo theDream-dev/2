@@ -65,7 +65,7 @@ async def respond_to_question(message: types.Message):
 
     # проверка длины контекста и орезка 
 
-    if len(messages_arr) >=16:
+if len(messages_arr) >=16:
         messages_arr = messages_arr[:3]    
 
 
