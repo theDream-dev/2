@@ -15,13 +15,19 @@ dp = Dispatcher(bot)
 
 print('mvd')
 
-messages_arr=[
+messages_arr = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "hello i am a new gpt user"},
         {"role": "assistant", "content": "Greetings! How can i help you?"},
     ]
 
+
 def update(messages, role, content):
+
+    # check messages_arr length
+    if len(messages_arr) > 20:
+        del messages_arr[3:]
+
     messages_arr.append({"role": role, "content": content})
     return messages_arr
 
@@ -30,6 +36,7 @@ def update(messages, role, content):
 async def send_welcome(message: types.Message):
     await bot.send_message(message.chat.id,"Привет\! Я молодой чат бот основанный на нейросети GPT от компании OpenAI\.",  parse_mode="MarkdownV2")
     await bot.send_message(message.chat.id,"Как я могу вам помочь\?",  parse_mode="MarkdownV2")
+
 
 @dp.message_handler()
 async def respond_to_question(message: types.Message):
@@ -62,13 +69,6 @@ async def respond_to_question(message: types.Message):
 
     #обновление массива контекста
     update(messages_arr, "assistant", answer)
-
-    # проверка длины контекста и орезка 
-
-    if len(messages_arr) >=16:
-        messages_arr = messages_arr[:3]    
-
-
 
 
 if __name__ == '__main__':
