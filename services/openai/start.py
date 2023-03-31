@@ -1,10 +1,6 @@
-import openai
-import requests
-
 import config as cfg
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
-from aiogram.types import ParseMode, ChatActions, Message
 
 
 # Set up Telegram bot

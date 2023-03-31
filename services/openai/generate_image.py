@@ -1,5 +1,4 @@
 import openai
-import requests
 
 import config as cfg
 from aiogram import Bot, types
@@ -8,7 +7,6 @@ from aiogram.types import ParseMode, ChatActions, Message
 
 from states import GenerateImage
 
-# from main import bot, dp
 
 # Set up OpenAI API key
 openai.api_key = cfg.AI_TOKEN
