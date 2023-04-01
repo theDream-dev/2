@@ -3,8 +3,9 @@ import openai
 import config as cfg
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher, FSMContext
-from aiogram.types import ParseMode, ChatActions, Message, ReplyKeyboardMarkup
+from aiogram.types import ChatActions
 
+from buttons.buttons import create_exit_button
 from states import GenerateImage
 
 
@@ -20,8 +21,7 @@ bot = Bot(cfg.TG_TOKEN)
 async def generation_image_welcome(message: types.Message):
 
     # creating button
-    exit_button = types.InlineKeyboardButton(text='Выйти из режима')
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).add(exit_button)
+    keyboard = create_exit_button()
 
     await bot.send_message(message.chat.id,
                            "Это режим генерации картинок\. Давай проверим, насколько хороша твоя фантазия\!",

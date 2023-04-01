@@ -1,10 +1,11 @@
-from aiogram.types import ReplyKeyboardRemove, \
-    ReplyKeyboardMarkup, KeyboardButton, \
-    InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram import types
+from aiogram.types import ReplyKeyboardMarkup
 
-# create button
-exit_mode = KeyboardButton('Exit mode')
 
-# create keyboard and add button
-keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(exit_mode)
+def create_exit_button():
+    """Кнопка для выхода из режимов prompt"""
 
+    # creating button
+    exit_button = types.InlineKeyboardButton(text='Выйти из режима')
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).add(exit_button)
+    return keyboard
