@@ -8,11 +8,6 @@ from aiogram.utils import executor
 from aiogram.types import ParseMode, ChatActions, Message
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
-
-# from services.openai.start import bot, dp
-# from services.openai.img import bot, dp
-# from services.openai.generate import bot, dp
-
 from services.openai.start import register_start
 from services.openai.generate_text import register_generate_text
 from services.openai.generate_image import register_generate_image
@@ -47,8 +42,6 @@ async def main():
     except:
         print('smth got wrong')
 
-    finally:
-        await bot.session.close()
 
 if __name__ == '__main__':
     try:

@@ -3,8 +3,10 @@ import openai
 import config as cfg
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher, FSMContext
-from aiogram.types import ParseMode, ChatActions, Message
+from aiogram.types import ChatActions, CallbackQuery, ReplyKeyboardMarkup
 
+# from buttons.buttons import keyboard
+# from buttons.executor import process_button
 from states import GenerateText
 
 # Set up OpenAI API key
@@ -12,7 +14,7 @@ openai.api_key = cfg.AI_TOKEN
 
 # Set up Telegram bot
 bot = Bot(cfg.TG_TOKEN)
-# dp = Dispatcher(bot)
+dp = Dispatcher(bot)
 
 
 """Classic OpenAI part"""
@@ -37,12 +39,17 @@ def update(messages, role, content):
 
 # @dp.message_handler(commands=['generate_text'])
 async def generation_text_welcome(message: types.Message):
+
+    # creating button
+    exit_button = types.InlineKeyboardButton(text='Выйти из режима')
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).add(exit_button)
+
     await bot.send_message(message.chat.id,
                            "Так \- так\. Ты перешел в режим классического помощника\. Можешь задать мне любой вопрос\!",
                            parse_mode="MarkdownV2")
     await bot.send_message(message.chat.id, "Как я могу вам помочь\?", parse_mode="MarkdownV2")
-    await bot.send_message(message.chat.id, "Чтобы выйти из режима введите 'Cancel'", parse_mode="MarkdownV2")
-
+    await bot.send_message(message.chat.id, "Чтобы выйти из режима, нажмите кнопку", parse_mode="MarkdownV2",
+                           reply_markup=keyboard)
 
     # now waiting for prompt
     await GenerateText.wait_prompt.set()
@@ -58,13 +65,13 @@ async def respond_to_question(message: types.Message, state: FSMContext):
     # Get the question from the user
     question = message.text
 
-    if question == "Cancel":
-        await bot.send_message(message.chat.id, "Canceled generating!")
+    if question == "Выйти из режима":
+        await bot.send_message(message.chat.id, "Произошла деактивация режима классического помощника...")
+        await bot.send_message(message.chat.id, "Бот не будет реагировать на запросы до следующего выбора режима")
         await state.finish()
 
     elif question.startswith('/'):
         await bot.send_message(message.chat.id, "Probably you forgot to type 'Cancel'!")
-
 
     else:
 

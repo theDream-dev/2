@@ -15,9 +15,9 @@ async def cmd_start(message: types.Message):
                            "Привет\! Это новый бот, основанный на нейросети GPT от компании OpenAI\.",
                            parse_mode="MarkdownV2")
     await bot.send_message(message.chat.id,
-                           "Над разработкой трудились в крови и поте два Александра \- некие Руденко и Шмигельский",
+                           "Над разработкой трудились в крови и поте два Александра",
                            parse_mode="MarkdownV2")
-    await bot.send_message(message.chat.id, "Чем я могу Вам помочь?", parse_mode="MarkdownV2")
+    await bot.send_message(message.chat.id, "Для начала выбери режим в левой части клавиатуры", parse_mode="MarkdownV2")
 
 
 def register_start(dp: Dispatcher):

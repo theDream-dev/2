@@ -3,7 +3,7 @@ import openai
 import config as cfg
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher, FSMContext
-from aiogram.types import ParseMode, ChatActions, Message
+from aiogram.types import ParseMode, ChatActions, Message, ReplyKeyboardMarkup
 
 from states import GenerateImage
 
@@ -18,11 +18,17 @@ bot = Bot(cfg.TG_TOKEN)
 
 
 async def generation_image_welcome(message: types.Message):
+
+    # creating button
+    exit_button = types.InlineKeyboardButton(text='Выйти из режима')
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True).add(exit_button)
+
     await bot.send_message(message.chat.id,
                            "Это режим генерации картинок\. Давай проверим, насколько хороша твоя фантазия\!",
                            parse_mode="MarkdownV2")
     await bot.send_message(message.chat.id, "Жду твой запрос\.", parse_mode="MarkdownV2")
-    await bot.send_message(message.chat.id, "Чтобы выйти из режима введите 'Cancel'", parse_mode="MarkdownV2")
+    await bot.send_message(message.chat.id, "Чтобы выйти из режима нажмите кнопку", parse_mode="MarkdownV2",
+                           reply_markup=keyboard)
 
     # now waiting for prompt
     await GenerateImage.wait_prompt.set()
@@ -34,9 +40,9 @@ async def generate_image(message: types.Message, state: FSMContext):
     # Get the prompt from the user
     prompt = message.text
 
-    if prompt == "Cancel":
-        await bot.send_message(message.chat.id, "Canceled generating!")
-        await state.finish()
+    if prompt == "Выйти из режима":
+        await bot.send_message(message.chat.id, "Произошла деактивация режима генерации картинок...")
+        await bot.send_message(message.chat.id, "Бот не будет реагировать на запросы до следующего выбора режима")
 
     elif prompt.startswith('/'):
         await bot.send_message(message.chat.id, "Probably you forgot to type 'Cancel'!")
