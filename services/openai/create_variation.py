@@ -98,7 +98,6 @@ async def variate_image(message: types.Message, state: FSMContext):
                                  caption="Фото было конвертировано в формат PNG.")
         else:
             # Фото уже в формате PNG, можем его использовать
-            # Ваш код обработки фото здесь
             await bot.send_message(message.chat.id, text="Фото в формате PNG.")
 
         # Проверяем, что фото квадратное
