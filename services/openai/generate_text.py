@@ -30,7 +30,7 @@ messages_arr = [
 def update(messages, role, content):
 
     # check message_arr length
-    if len(messages_arr) > 20:
+    if len(messages_arr) > 30:
         del messages_arr[3:]
 
     messages_arr.append({"role": role, "content": content})
@@ -91,7 +91,7 @@ async def respond_to_question(message: types.Message, state: FSMContext):
         else:
             await bot.send_message(message.chat.id, text=answer)
 
-        await bot.send_message(message.chat.id, str(len(messages_arr)))
+        #await bot.send_message(message.chat.id, str(len(messages_arr)))
 
         # update contex array
         update(messages_arr, "assistant", answer)

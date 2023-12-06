@@ -6,6 +6,7 @@ class GenerateText(StatesGroup):
     wait_prompt = State()
 
 
-class GenerateImage(StatesGroup):
+""" class GenerateImage(StatesGroup):
     cmd_generate = State()
     wait_prompt = State()
+ """
